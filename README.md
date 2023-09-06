@@ -1,2 +1,2 @@
-# Food_delivery_app
-ELTE IK BSc Thesis public
+# My Thesis program for ELTE IK Bsc
+- This app is also hosted on pythonanywhere: [Open website](http://bgabor99.pythonanywhere.com)
