@@ -1,0 +1,53 @@
+/* adminlogs.html */
+
+#logoutMenuBtn {
+    color: red;
+}
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#filterForm{
+    background-color: #d3e5ff;
+    width: 20%;
+    display: table-cell;
+}
+
+#filterTitle{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#filterDiv{
+    margin: auto;
+    width: auto;
+}
+
+#filterSearchBtn{
+    margin-top: 5px;
+}
+
+#delAllLogsBtn{
+    margin-top: 10px;
+}
+
+#logsForm{
+    background-color: #fff3cd;
+    width: 80%;
+    display: table-cell;
+}
+
+#logsDiv{
+    width: 80%;
+    display: block;
+    margin: auto;
+}
+
+#logsTable{
+    width: 80%;
+}

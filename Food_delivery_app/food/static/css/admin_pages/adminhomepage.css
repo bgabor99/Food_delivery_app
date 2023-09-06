@@ -1,0 +1,125 @@
+/* adminhomepage.html */
+
+#logoutMenuBtn {
+    color: red;
+}
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#modifyForm{
+    background-color: #fff3cd;
+    width: 20%;
+    display: table-cell;
+}
+
+#adminProductsForm {
+    background-color: #fff3cd;
+    width: 80%;
+    display: table-cell;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#successMsg{
+    color: green;
+    text-align: center;
+}
+
+#errorMsg{
+    color: red;
+    text-align: center;
+}
+
+#modifyLabel{
+    margin-top: 10px;
+    font-family: Garamond;
+    font-weight: bold;
+}
+
+#modifyNameInp{
+    width: 200px;
+    margin-top: 5px;
+}
+
+#modifyPriceInp{
+    width: 100px;
+    margin-top: 5px;
+}
+
+#modifyAllergenInp{
+    width: 200px;
+    margin-top: 5px;
+}
+
+#modifyDetailsInp{
+    height: 200px;
+    width: 200px;
+    margin-top: 5px;
+}
+
+#modifyFoodBtn{
+    margin-top: 5px;
+}
+
+#restartOrderRatingsBtn{
+    margin-top: 10px;
+}
+
+#addProductsDiv{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    width: 800px;
+}
+
+#addNameInp{
+    width: 200px;
+    display: inline;
+    margin: auto;
+}
+
+#addPriceInp{
+    width: 100px;
+    display: inline;
+    margin: auto;
+}
+
+#addAllergenInp{
+    width: 100px;
+    display: inline;
+    margin: auto;
+}
+
+#addImgBtn{
+    width: 120px;
+    height: 30px;
+}
+
+#addImgInp{
+    display: none;
+}
+
+#addDetailsInp{
+    height: 100px;
+    width: 50%;
+    margin-top: 5px;
+}
+
+#addFoodBtn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: inline;
+}
+
+#productsDiv{
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+#productsName{
+    font-family: Garamond;
+}

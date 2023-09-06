@@ -1,0 +1,21 @@
+/* adminorders.html */
+
+#logoutMenuBtn {
+    color: red;
+}
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#pageTitle{
+    text-align: center;
+}
+
+#ordersDiv{
+    margin: 40px;
+}

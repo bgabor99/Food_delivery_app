@@ -1,0 +1,21 @@
+/* userprofile.html */
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#logoutMenuBtn {
+    color: red;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#pageTitle{
+    text-align: center;
+}
+
+#profileDiv{
+    margin: 40px;
+}

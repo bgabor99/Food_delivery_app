@@ -1,0 +1,25 @@
+/* cartepage.html */
+
+.mt-20 {
+    margin-top: 20px
+}
+
+.mb-20 {
+    margin-bottom: 20px
+}
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#productsDiv{
+    background-color: #fff3cd;
+}
+
+#productsName{
+    font-family: Garamond;
+}

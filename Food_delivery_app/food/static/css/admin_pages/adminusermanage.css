@@ -1,0 +1,21 @@
+/* usermanage.html */
+
+#logoutMenuBtn {
+    color: red;
+}
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#pageTitle{
+    text-align: center;
+}
+
+#usersDiv{
+    margin: 40px;
+}

@@ -1,0 +1,123 @@
+/* customerwelcome.html */
+
+#menuBtn{
+    background-color: #508bfc;
+}
+
+#logoutMenuBtn {
+    color: red;
+}
+
+#menuContent{
+    right: 0;
+}
+
+#filterForm {
+    width: 20%;
+    display: table-cell;
+    background-color: #fff3cd;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#filterTitle{
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#filterDiv{
+    margin: auto;
+    width: auto;
+}
+
+#filterSubmitBtn{
+    margin-top: 10px;
+}
+
+
+#deliveryTitle{
+    margin-top: 10px;
+    font-weight: bolder;
+}
+
+#deliveryCityInp{
+    width: 400px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#deliveryZipInp{
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#deliveryAddressInp{
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#deliverySubmitBtn{
+    margin-bottom: 20px;
+}
+
+#billingCheckboxLabel{
+    margin-right: 10px;
+}
+
+#billingTitle{
+    font-weight: bolder;
+}
+
+#billingAddressDiv{
+    display: none;
+}
+
+#billingCity{
+    width: 400px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#billingZip{
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#billingAddress{
+    width: 400px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#productsForm {
+    width: 80%;
+    display: table-cell;
+    background-color: white;
+}
+
+#productsDiv{
+    background-color: #fff3cd;
+}
+
+#productsName{
+    font-family: Garamond;
+}
+
+#productsQuantityInp{
+    margin-top: 10px;
+    width: 60px;
+}
+
+#successMsg{
+    color: green;
+    text-align: center;
+}
+
+#errorMsg{
+    color: red;
+    text-align: center;
+}

@@ -1,0 +1,75 @@
+/* usersignuppage.html */
+
+#hompageBtn{
+    background-color: #508bfc;
+}
+
+.vh-100 {
+    background-color: #508bfc;
+}
+
+#cards {
+    border: 1em;
+    border-radius: 24px;
+}
+
+#signUpBtn {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.card {
+    width: 400px;
+    border: none
+}
+
+.btr {
+    border-top-right-radius: 5px !important
+}
+
+.btl {
+    border-top-left-radius: 5px !important
+}
+
+.btn-dark {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd
+}
+
+.btn-dark:hover {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd
+}
+
+.nav-pills {
+    display: table !important;
+    width: 100%
+}
+
+.nav-pills .nav-link {
+    border-radius: 0px;
+    border-bottom: 1px solid #508bfc
+}
+
+.nav-item {
+    display: table-cell;
+    background: #0d6efd2e
+}
+
+#signUpBtn{
+    background-color: #0d6efd;
+    width: 10rem;
+}
+
+#successMsg{
+    color: green;
+    text-align: center;
+}
+
+#errorMsg{
+    color: red;
+    text-align: center;
+}
