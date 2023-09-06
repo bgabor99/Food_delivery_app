@@ -1,0 +1,11 @@
+asgiref==3.5.0
+Django==4.0.3
+django-bootstrap-form==3.4
+django-db-logger==0.1.12
+django-filter==21.1
+django-globals==0.3.2
+django-test==0.4030
+Pillow==9.0.1
+six==1.16.0
+sqlparse==0.4.2
+tzdata==2022.1
