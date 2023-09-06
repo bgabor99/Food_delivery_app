@@ -1,0 +1,7 @@
+.vs
+*.pyc
+Food_delivery_app/food/django_logs.log
+Food_delivery_app/food/media/foodapp/static/uploaded_images/*
+Food_delivery_app/food/foodapp/migrations/*
+Food_delivery_app/food/db.sqlite3
+Food_delivery_app/food/env/*
