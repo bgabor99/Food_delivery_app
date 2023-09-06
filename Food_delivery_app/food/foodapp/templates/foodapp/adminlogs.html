@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block content %}
+<link href="../../static/css/admin_pages/adminlogs.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="w3-container">
+        <a class="btn btn-secondary" href="/admin/homepage/">&#8678; Go Back</a>
+    </div>
+    <div class="w3-container">
+        <div class="w3-dropdown-hover w3-right">
+            <button id="menuBtn" class="btn btn-secondary">Menu &#8681;</button>
+            <div id="menuContent" class="w3-dropdown-content w3-bar-block w3-border">
+                <a class="w3-bar-item w3-button" href="/adminorders/">All orders</a>
+                <a class="w3-bar-item w3-button" href="/usermanage/">All users</a>
+                <a class="w3-bar-item w3-button" href="/adminlogs/">Logs</a>
+                <div class="dropdown-divider"></div>
+                <a id="logoutMenuBtn" class="w3-bar-item w3-button" href="/adminlogout/">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="d-flex justify-content-center">
+    <div id="filterForm">
+        <form method="get">
+            <div id="filterTitle" class="d-flex justify-content-center">
+                <p>Filters</p>
+            </div>
+            <div id="filterDiv" class="container">
+                {{ filter.form|bootstrap }}
+                <button id="filterSearchBtn" class="btn btn-primary" type="submit">Search</button>
+                <div>
+                    <a id="delAllLogsBtn" href="/deletealloflogs/" class="btn btn-danger"> Delete all logs! </a>
+                    </td>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="logsForm">
+        <div id="logsDiv" class="table-responsive-lg text-center">
+            <table id="logsTable" class="table table-responsive-lg table-striped table-bordered">
+
+                <tr>
+                    <!--<th>Id</th>-->
+                    <th>User</th>
+                    <th>Datetime</th>
+                    <th>Ip address</th>
+                    <th>Method</th>
+                    <th>View function</th>
+                    <th>Level</th>
+                    <th>Priority</th>
+                    <th>Message</th>
+                </tr>
+                {% for log in logs %}
+                <tr>
+                    <!--<td>{{log.id}}</td>-->
+                    <td>{{log.user}}</td>
+                    <td>{{log.datetime}}</td>
+                    <td>{{log.ipaddress}}</td>
+                    <td>{{log.requestMethod}}</td>
+                    <td>{{log.viewFunctionCalled}}</td>
+                    <td>{{log.priorityInt}}</td>
+                    <td>{{log.priorityString}}</td>
+                    <td>{{log.message}}</td>
+                    <td><a href="/deletelog/{{log.id}}/" class="btn btn-danger"> Delete </a></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Footer-->
+<footer class="footer bg-light mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i
+                                class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/" target="_blank"><i
+                                class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}

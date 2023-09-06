@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="../../static/css/costumer_pages/userlogin.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a id="hompageBtn" class="btn btn-secondary" href="../">&#8678; Homepage</a>
+    </div>
+</nav>
+
+
+<section class="vh-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card shadow-2-strong" id="cards">
+                    <div class="card-body p-5 text-center ">
+
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item text-center"> <a class="nav-link btr" id="pills-profile-tab"
+                                    data-toggle="pill" href="../usersignuppage/" role="tab" aria-controls="pills-profile"
+                                    aria-selected="false">Signup</a> </li>
+                            <li class="nav-item text-center"> <a class="nav-link active btl" id="pills-home-tab"
+                                    data-toggle="pill" href="../loginuser/" role="tab" aria-controls="pills-home"
+                                    aria-selected="true">Login</a> </li>
+                        </ul>
+                        <form method="post" action="/costumer/authenticate/">
+                            <h3 class="mb-5">Log in</h3>
+                            <div>
+                                {% for message in messages %}
+                                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                                        <p id="successMsg">{{message}}</p>
+                                    {% else %}
+                                        <p id="errorMsg">{{message}}</p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="form-outline mb-4">
+                                <input class="form-control form-control-lg" type="text" name="username"
+                                    placeholder="username" minlength="4" maxlength="20" required />
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <input id="passwordInp" class="form-control form-control-lg" type="password" name="password"
+                                    placeholder="passsword" minlength="4" maxlength="20" required />
+                                    <input type="checkbox" onclick="togglePassword()">
+                                    <label id="toggleLabel">Show password</label>
+                            </div>
+
+                            <table>
+                                <tr>
+                                    <td>
+                                        <p id="captchaLabel">CAPTCHA:</p>
+                                    </td>
+                                    <td>
+                                        <input type="hidden" id="captchaVar" name="variable" value="{{ captcha }}">
+                                        <canvas id="captchaCanvas"></canvas>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input id="captchaInp" type="text"
+                                            class="form-control" name="captcha" placeholder="Captcha" minlength="4"
+                                            maxlength="4" required>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <input class="btn btn-success" id="logInBtn" type="submit" name="" value="Log in">
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer-->
+<footer class="footer bg-light mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item"><a href="../contact/">Contact</a></li>
+                    <li class="list-inline-item">⋅</li>
+                    <li class="list-inline-item"><a href="../support/">Support</a></li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i
+                                class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/" target="_blank"><i
+                                class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script type="text/javascript" src="../../static/js/costumer_pages/displayCaptcha.js"></script>
+<script type="text/javascript" src="../../static/js/costumer_pages/showPasswords.js"></script>
+{% endblock %}

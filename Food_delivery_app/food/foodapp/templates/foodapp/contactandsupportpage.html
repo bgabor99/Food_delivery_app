@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<link href="../../static/css/costumer_pages/contactandsupport.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+        <a class="btn btn-secondary" href="../">&#8678; Homepage</a>
+    </div>
+</nav>
+<div class="container-fluid rounded">
+    <div class="row px-5">
+        <div class="col-sm-6">
+            <div>
+                <h3 class="text-white">Support</h3>
+                <p class="text-secondary">Send us an email or just send a message on Facebook and our Team will respond to you within 12 ours.</p>
+            </div>
+            <div id="bordering">
+                 <p class="text-white">Tel: +36/20-12-345-67</p>
+                 <p class="text-white">E-mail: <a href="mailto:bertagabor99@gmail.com"> bertagabor99@gmail.com</a></p>
+                </div>
+            <div class="pt-lg-4 d-flex flex-row justify-content-start">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/"  target="_blank"><i class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-6 pad">
+                <h3 class="text-white">Contact us</h3>
+                <p class="text-secondary">Feel free to meet with us in our support office in Budapest.</p>
+                <div class="mapouter"><div class="gmap_canvas">
+                    <iframe width="400" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=budapest%20elte%20ik&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://putlocker-is.org"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="../../static/css/admin_pages/adminorders.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="w3-container">
+        <a class="btn btn-secondary" href="/admin/homepage/">&#8678; Go Back</a>
+    </div>
+    <div class="w3-container">
+        <div class="w3-dropdown-hover w3-right">
+        <button id="menuBtn" class="btn btn-secondary">Menu &#8681;</button>
+        <div id="menuContent" class="w3-dropdown-content w3-bar-block w3-border">
+            <a class="w3-bar-item w3-button" href="/adminorders/">All orders</a>
+            <a class="w3-bar-item w3-button" href="/usermanage/">All users</a>
+            <a class="w3-bar-item w3-button" href="/adminlogs/">Logs</a>
+            <div class="dropdown-divider"></div>
+            <a id="logoutMenuBtn" class="w3-bar-item w3-button" href="/adminlogout/">Logout</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+
+<h1 id="pageTitle">All orders</h1>
+{% for order in orders %}
+<div id="ordersDiv" class="alert alert-warning" role="alert">
+    <p><b>Name:</b> {{order.username}} </p>
+    <p><b>Number:</b> {{order.phoneno}} </p>
+    <p><b>Delivery address:</b> {{order.address}} </p>
+    {% if order.address == order.billingAddress %}
+    <p><b>Billing address:</b> The same as the delivery address.</p>
+    {% else %}
+    <p><b>Billing address:</b> {{order.billingAddress}} </p>
+    {% endif %}
+    <p><b>Items:</b> {{order.orderitems}} </p>
+    <p><b>Total:</b> {{order.total}} Ft</p>
+    <p><b>Status:</b> {{order.status}} </p>
+    {% if order.rate == "notRated" %}
+    <p><b>Rating from costumer:</b> Costumer not rated this order yet. </p>
+    {% else %}
+    <p><b>Rating from costumer:</b> {{order.rate}} </p>
+    {% endif %}
+    {% if order.status == "delivered" %}
+        <a href="/declineorder/{{order.id}}/" class="btn btn-danger">Decline</a>
+        <a href="/acceptorder/{{order.id}}/" class="btn btn-warning">Accept</a>
+    {% elif order.status == "accepted" %}
+        <a href="/declineorder/{{order.id}}/" class="btn btn-danger">Decline</a>
+        <a href="/deliveredorder/{{order.id}}/" class="btn btn-success">Delivered</a>
+    {% elif order.status == "declined" %}
+        <a href="/acceptorder/{{order.id}}/" class="btn btn-warning">Accept</a>
+        <a href="/deliveredorder/{{order.id}}/" class="btn btn-success">Delivered</a>
+        <b>Declined order!</b>
+    {% else %}
+        <a href="/declineorder/{{order.id}}/" class="btn btn-danger">Decline</a>
+        <a href="/acceptorder/{{order.id}}/" class="btn btn-warning">Accept</a>
+        <a href="/deliveredorder/{{order.id}}/" class="btn btn-success">Delivered</a>
+    {% endif %}
+    <p></p>
+    <a href="/deleteorder/{{order.id}}/" class="btn btn-danger">Delete order!</a>
+</div>
+{% endfor %}
+
+
+  <!-- Footer-->
+  <footer class="footer bg-light mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/"  target="_blank"><i class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+{% endblock %}

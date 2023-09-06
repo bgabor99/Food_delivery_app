@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="../../static/css/admin_pages/adminlogin.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light static-top">
+  <div class="w3-container">
+    <a id="homepageBtn" class="btn btn-secondary" href="../">Users homepage</a>
+  </div>
+</nav>
+
+<section class="vh-100">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" id="cards">
+          <div class="card-body p-5 text-center ">
+            <form method="post" action="/adminauthenticate/">
+              <h3 class="mb-5">Admin Login</h3>
+
+              <div>
+                {% for message in messages %}
+                  {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                    <p id="successMsg">{{message}}</p>
+                  {% else %}
+                    <p id="errorMsg">{{message}}</p>
+                  {% endif %}
+                {% endfor %}
+              </div>
+
+              <div class="form-outline mb-4">
+                <input class="form-control form-control-lg" type="text" name="username" placeholder="username"
+                  minlength="4" maxlength="20" required />
+              </div>
+
+              <div class="form-outline mb-4">
+                <input class="form-control form-control-lg" type="password" name="password" placeholder="password"
+                  minlength="4" maxlength="20" required />
+              </div>
+
+              <input class="btn btn-success" id="logInBtn" type="submit" name="submit" value="Log in">
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- Footer-->
+<footer class="footer bg-light mt-auto">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+        <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+      </div>
+      <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-4">
+            <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i class="bi-facebook fs-3"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="https://www.instagram.com/brtgbr/" target="_blank"><i class="bi-instagram fs-3"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+{% endblock %}

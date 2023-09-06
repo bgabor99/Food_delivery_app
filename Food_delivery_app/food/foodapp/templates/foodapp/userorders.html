@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<link href="../../static/css/costumer_pages/userorders.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light">
+    <div class="w3-container">
+        <a class="btn btn-secondary" href="/costumer/welcome/">&#8678; Go Back</a>
+    </div>
+    <div class="w3-container">
+        <div class="w3-dropdown-hover w3-right">
+        <button id="menuBtn" class="btn btn-secondary">Menu &#8681;</button>
+        <div id="menuContent" class="w3-dropdown-content w3-bar-block w3-border">
+            <a class="w3-bar-item w3-button" href="/userorders/">My orders</a>
+            <a class="w3-bar-item w3-button" href="/userprofile/">My profile</a>
+            <div class="dropdown-divider"></div>
+            <a id="logoutMenuBtn" class="w3-bar-item w3-button" href="/userlogout/">Logout</a>
+        </div>
+        </div>
+    </div>
+</nav>
+
+
+<h1 id="pageTitle">My orders</h1>
+<!--<body onload="changeProgressStatus()"></body>-->
+{% for order in orders %}
+<div id="ordersDiv" class="alert alert-warning" role="alert">
+    <p><b>Name:</b> {{order.username}} </p>
+    <p><b>Number:</b> {{order.phoneno}} </p>
+    <p><b>Delivery address:</b> {{order.address}} </p>
+    {% if order.address == order.billingAddress %}
+    <p><b>Billing address:</b> The same as the delivery address.</p>
+    {% else %}
+    <p><b>Billing address:</b> {{order.billingAddress}} </p>
+    {% endif %}
+    <p><b>Items:</b> {{order.orderitems}} </p>
+    <p><b>Total:</b> {{order.total}} Ft </p>
+    <!--<p><b>Status:</b> {{order.status}} </p>-->
+        {% if order.status == "delivered" %}
+        <p id="deliveredMsg"></p>
+            {% if order.rate == 'notRated' %}
+                <form method="post" action="/rateaction/{{order.id}}/">
+                    {% csrf_token %}
+                    <b>Please rate your order:</b>
+                    <select name="rateSelect" id="rating">
+                        <option value="1">(1) Bad</option>
+                        <option value="2">(2) Kinda Bad</option>
+                        <option value="3">(3) Meh</option>
+                        <option value="4">(4) Pretty good</option>
+                        <option value="5" selected>(5) Best of the bests</option>
+                        <input id="submitBtn" class="btn btn-success" type="submit" name="submit">
+                    </select>
+                </form>
+                <div id="progressBarDiv" class="stepper-wrapper">
+                    <div id="pendingProgressDiv" class="stepper-item completed">
+                      <div class="step-counter"><i class="bi bi-hourglass-split"></i></div>
+                      <div class="step-name">Pending</div>
+                    </div>
+                    <div id="acceptedProgressDiv" class="stepper-item completed">
+                      <div class="step-counter"><i class="bi bi-cart-check"></i></div>
+                      <div class="step-name">Accepted</div>
+                    </div>
+                    <div id="deliveredProgressDiv" class="stepper-item completed">
+                      <div class="step-counter"><i class="bi bi-check-square"></i></div>
+                      <div class="step-name">Delivered</div>
+                    </div>
+                </div>            
+                {% else %}
+                <p class="feedbackMsg">Thank you for your rating!</p>
+            {% endif %}
+        {% elif order.status == "pending" %}
+            <p id="pendingMsg" class="feedbackMsg">Thank you for your order! Please wait for acceptance.</p>
+            <div id="progressBarDiv" class="stepper-wrapper">
+                <div id="pendingProgressDiv" class="stepper-item completed">
+                  <div class="step-counter"><i class="bi bi-hourglass-split"></i></div>
+                  <div class="step-name">Pending</div>
+                </div>
+                <div id="acceptedProgressDiv" class="stepper-item active">
+                  <div class="step-counter"><i class="bi bi-cart-check"></i></div>
+                  <div class="step-name">Accepted</div>
+                </div>
+                <div id="deliveredProgressDiv" class="stepper-item active">
+                  <div class="step-counter"><i class="bi bi-check-square"></i></div>
+                  <div class="step-name">Delivered</div>
+                </div>
+            </div>   
+        {% elif order.status == "declined" %}
+            <p id="declinedMsg" class="feedbackMsg">Sorry, we can't deliver your order :(
+            <br>
+            Please contact support for more information.</p>
+        {% else %}
+            <p id="acceptedMsg" class="feedbackMsg">Your order is rushing on its way, please be patient..</p>
+            <div id="progressBarDiv" class="stepper-wrapper">
+                <div id="pendingProgressDiv" class="stepper-item completed">
+                  <div class="step-counter"><i class="bi bi-hourglass-split"></i></div>
+                  <div class="step-name">Pending</div>
+                </div>
+                <div id="acceptedProgressDiv" class="stepper-item completed">
+                  <div class="step-counter"><i class="bi bi-cart-check"></i></div>
+                  <div class="step-name">Accepted</div>
+                </div>
+                <div id="deliveredProgressDiv" class="stepper-item active">
+                  <div class="step-counter"><i class="bi bi-check-square"></i></div>
+                  <div class="step-name">Delivered</div>
+                </div>
+            </div>   
+        {% endif %}
+    </p>
+</div>
+{% endfor %}
+
+
+<!-- Footer-->
+<footer class="footer bg-light mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item"><a href="../contact/" target="_blank">Contact</a></li>
+                    <li class="list-inline-item">⋅</li>
+                    <li class="list-inline-item"><a href="../support/" target="_blank">Support</a></li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/"  target="_blank"><i class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}

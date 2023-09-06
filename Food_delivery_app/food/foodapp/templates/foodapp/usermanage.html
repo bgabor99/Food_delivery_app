@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block content %}
+<link href="../../static/css/admin_pages/adminusermanage.css" rel="stylesheet" />
+
+<nav class="navbar navbar-light bg-light static-top">
+    <div class="w3-container">
+        <a class="btn btn-secondary" href="/admin/homepage/">&#8678; Go Back</a>
+    </div>
+    <div class="w3-container">
+        <div class="w3-dropdown-hover w3-right">
+        <button id="menuBtn" class="btn btn-secondary">Menu &#8681;</button>
+        <div id="menuContent" class="w3-dropdown-content w3-bar-block w3-border">
+            <a class="w3-bar-item w3-button" href="/adminorders/">All orders</a>
+            <a class="w3-bar-item w3-button" href="/usermanage/">All users</a>
+            <a class="w3-bar-item w3-button" href="/adminlogs/">Logs</a>
+            <div class="dropdown-divider"></div>
+            <a id="logoutMenuBtn" class="w3-bar-item w3-button" href="/adminlogout/">Logout</a>
+        </div>
+        </div>
+    </div>
+</nav>
+<h1 id="pageTitle">All users</h1>
+{% for user in users %}
+    {% for auth_user in auth_users %}
+        {% if auth_user.id == user.userid %}
+            <div id="usersDiv" class="alert alert-warning" role="alert">
+                <p><b>Username:</b> {{auth_user}} </p>
+                <!--<p><b>Userid:</b> {{user.userid}} </p>-->
+                <p><b>Phone number:</b> {{user.phoneno}} </p>
+                <!--<p><b>Given rates counter:</b> {{user.givenRatesCounter}} </p>
+                <p><b>Given rates sum:</b> {{user.givenRatesSum}} </p>-->
+                <p><b>Given rates average:</b> {% widthratio user.givenRatesSum user.givenRatesCounter 1 %} </p>
+                <!--<p><b>Requested to delete his/her profile:</b> {{user.requestToBeDeleted}} </p>-->
+                {% if user.requestToBeDeleted == True %}
+                    <p><b>Requested to delete his/her profile!</b></p>
+                    <a href="/deleteuser/{{user.userid}}/{{auth_user.username}}/" class="btn btn-success">Delete user!</a>
+                {% else %}
+                    <a href="/deleteuser/{{user.userid}}/{{auth_user.username}}/" class="btn btn-danger">Delete user anyway!</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endfor %}
+
+
+  <!-- Footer-->
+  <footer class="footer bg-light mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/"  target="_blank"><i class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+{% endblock %}

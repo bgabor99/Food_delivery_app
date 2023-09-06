@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load bootstrap %}
+{% load static %}
+{% csrf_token %}
+<link href="../../static/css/costumer_pages/costumerwelcome.css" rel="stylesheet" />
+
+
+
+
+<nav class="navbar navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand">Welcome {{username}}!</a>
+    </div>
+    <div class="w3-container">
+        <div class="w3-dropdown-hover w3-right">
+            <button id="menuBtn" class="btn btn-secondary">Menu &#8681;</button>
+            <div id="menuContent" class="w3-dropdown-content w3-bar-block w3-border">
+                <a class="w3-bar-item w3-button" href="/userorders/">My orders</a>
+                <a class="w3-bar-item w3-button" href="/userprofile/">My profile</a>
+                <div class="dropdown-divider"></div>
+                <a id="logoutMenuBtn" class="w3-bar-item w3-button" href="/userlogout/">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+{% for message in messages %}
+{% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+<p id="successMsg">{{message}}</p>
+{% else %}
+<p id="errorMsg">{{message}}</p>
+{% endif %}
+{% endfor %}
+
+<div class="d-flex justify-content-center">
+    <div id="filterForm">
+        <form method="get">
+            <div id="filterTitle" class="d-flex justify-content-center">
+                <p>Filters</p>
+            </div>
+            <div id="filterDiv" class="container">
+                {{ filter.form|bootstrap }}
+                <button id="filterSubmitBtn" class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="productsForm">
+        <form method="post" action="/placeorder/">
+            {% csrf_token %}
+
+            <div class="container">
+                <div id="deliveryTitle" class="d-flex justify-content-center">
+                    <p>Delivery informations</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input id="deliveryCityInp" class="form-control form-control-md d-flex" type="text" name="city" placeholder="City.." minlength="2" maxlength="10"
+                        required>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input id="deliveryZipInp" class="form-control form-control-md" type="number" name="zip" placeholder="Zip code.." min="1000" max="9999" required>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input id="deliveryAddressInp" class="form-control form-control-md" type="text" name="address" placeholder="Address.." minlength="4" maxlength="30"
+                        required>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <input id="deliverySubmitBtn" class="btn-lg btn-success" type="submit" value="Place order!">
+            </div>
+
+            <!-- Checkbox for billing address -->
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <label id="billingCheckboxLabel" for="billCheckbox">Is your billing address different?</label>
+                    <!--<input type="checkbox" id="billCheckbox" name ="billCheckbox" onclick="billing_address_show_or_hide()">-->
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="billCheckbox" name ="billCheckbox" onclick="billing_address_show_or_hide()">
+                        <label id="billingCkbLabel" class="custom-control-label" for="billCheckbox">No, it's the same</label>
+                    </div>
+                </div>
+            </div>
+            <!-- Billing address -->
+            <div id="billingAddressDiv" class="container">
+                <div id="billingTitle" class="d-flex justify-content-center">
+                    <p>Billing informations</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input id="billingCity" class="form-control form-control-md d-flex" type="text" name="billingCity" placeholder="City.." minlength="2" maxlength="10">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input id="billingZip" class="form-control form-control-md" type="number" name="billingZip" placeholder="Zip code.." min="1000" max="9999">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <input id="billingAddress" class="form-control form-control-md" type="text" name="billingAddress" placeholder="Address.." minlength="4" maxlength="30">
+                </div>
+            </div>
+
+            <!-- products list -->
+            {% for food in foods %}
+            <div class="container justify-content-center mt-50 mb-50">
+                <div class="row  d-flex justify-content-center">
+                    <div class="col-md-10">
+
+                        <div id="productsDiv" class="card card-body mt-3 border border-dark">
+                            <div
+                                class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
+                                {% if food.image %}
+                                <div class="mr-2 mb-3 mb-lg-0"> <img src="{{ food.image.url }}" width="150" height="150"
+                                        alt="Food image"> </div>
+                                {% else %}
+                                <div class="mr-2 mb-3 mb-lg-0"> <img src="{% static 'img/no_image_available.jpg' %}"
+                                        width="150" height="150" alt="No image"> </div>
+                                {% endif %}
+                                <div class="media-body">
+                                    <h4 id="productsName" class="media-title font-weight-semibold">
+                                        <b>{{food.name}}</b>
+                                    </h4>
+                                    <p class="mb-3"> {{ food.details }} </p>
+                                    <ul class="list-inline list-inline-dotted mb-0">
+                                        {% if food.allergens %}
+                                        <li class="list-inline-item">Allergens: </li>
+                                        <li class="list-inline-item">{{ food.allergens }}</li>
+                                        {% else %}
+                                        <li class="list-inline-item">Allergens: </li>
+                                        <li class="list-inline-item">Nothing</li>
+                                        {% endif %}
+                                        <li>
+                                            <label>Quantity: </label>
+                                            <button id="decreaseBtn" class="btn-sm btn-danger" value="-1" onclick="decreaseQuantity({{ food.id }}); return false;">-</button>
+                                            <input id="{{food.id}}" name="{{food.id}}" value=0 min=0 max=100 type="number" name="quantity">
+                                            <button id="increaseBtn" class="btn-sm btn-success" value="1" onclick="increaseQuantity({{ food.id }}); return false;">+</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div
+                                    class="mt-3 mt-lg-0 ml-lg-3 text-center h-flex justify-content-center align-self-center">
+                                    <h3 class="mb-0 font-weight-semibold">{{ food.price }} Ft</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Footer-->
+<footer class="footer bg-light mt-auto">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item"><a href="../../contact/" target="_blank">Contact</a></li>
+                    <li class="list-inline-item">⋅</li>
+                    <li class="list-inline-item"><a href="../../support/" target="_blank">Support</a></li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Food delivery Website 2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-end my-auto">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item me-4">
+                        <a href="https://www.facebook.com/gabor.berta.92/" target="_blank"><i
+                                class="bi-facebook fs-3"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="https://www.instagram.com/brtgbr/" target="_blank"><i
+                                class="bi-instagram fs-3"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="../../static/js/costumer_pages/billing_address_show_or_hide.js"></script>
+<script type="text/javascript" src="../../static/js/costumer_pages/increase_or_decrease_food_quantity.js"></script>
+
+{% endblock %}
